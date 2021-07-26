@@ -44,6 +44,9 @@ export const match =
       find(([pattern]) => isMatch(pattern)(over))(standardize(patterns)) || []
 
     return {
-      fold: (def = () => {}, fn) => (action ? fn(action(over)) : def(over)),
+      fold:
+        (def = () => {}) =>
+        (fn = () => {}) =>
+          action ? fn(action(over)) : def(over),
     }
   }
