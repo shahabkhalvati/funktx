@@ -11,4 +11,12 @@ export const _generic = {
       return `${type.toString()}(${this[VALUE_FIELD]})`
     }
   },
+  of: (type) => (v) => {
+    const result = new type()
+    Object.defineProperty(result, VALUE_FIELD, {
+      value: v,
+    })
+
+    return result
+  },
 }

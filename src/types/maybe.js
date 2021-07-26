@@ -31,14 +31,7 @@ Just.prototype.constructor = Just
 Just.prototype.map = _generic.map(Just)
 Just.prototype.toString = _generic.toString(Just)
 
-Just.of = (v) => {
-  const result = new Just()
-  Object.defineProperty(result, VALUE_FIELD, {
-    value: v,
-  })
-
-  return result
-}
+Just.of = _generic.of(Just)
 
 export function Nothing() {
   Maybe.call(this)
