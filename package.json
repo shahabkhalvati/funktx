@@ -1,0 +1,52 @@
+{
+  "name": "funktx",
+  "version": "0.1.0",
+  "description": "helper functions, basic types, and essentials; FP style",
+  "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.esm.js",
+  "browser": "dist/bundle.umd.js",
+  "repository": "git@github.com:shahabkhalvati/funktx.git",
+  "author": "Shahab Khalvati <contact@shahabkhalvati.com>",
+  "license": "MIT",
+  "keywords": [
+    "template",
+    "node",
+    "module"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "watch 'npm run build' src",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
+    "coverage": "npm run test -- --coverage",
+    "prepublishOnly": "npm run build",
+    "release": "np"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "babel-jest": "^27.0.6",
+    "coveralls": "^3.1.1",
+    "eslint": "^7.31.0",
+    "fast-check": "^2.17.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "np": "^7.5.0",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1",
+    "rollup": "^2.53.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-filesize": "^9.1.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "watch": "^1.0.2"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
