@@ -1,2 +1,4 @@
-export const getName = (name) => name || 'buddy'
-export const sayHi = (to) => `Hi ${getName(to)}`
+export * from './core'
+export * from './test-utils'
+export * from './types'
+export * from './match'

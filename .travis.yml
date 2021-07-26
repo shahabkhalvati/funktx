@@ -3,4 +3,4 @@ node_js:
   - node
 
 script:
-  - yarn run coverage:ci
+  - npm run coverage:ci

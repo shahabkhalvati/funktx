@@ -15,12 +15,12 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "dev": "watch 'yarn run build' src",
+    "dev": "watch 'npm run build' src",
     "test": "jest",
-    "test:watch": "yarn run test -- --watch",
-    "coverage": "yarn run test -- --coverage",
-    "coverage:ci": "yarn run test -- --coverage --coverageReporters=text-lcov | coveralls",
-    "prepublishOnly": "yarn run build",
+    "test:watch": "npm run test -- --watch",
+    "coverage": "npm run test -- --coverage",
+    "coverage:ci": "npm run test -- --coverage --coverageReporters=text-lcov | coveralls",
+    "prepublishOnly": "npm run build",
     "release": "np"
   },
   "devDependencies": {
