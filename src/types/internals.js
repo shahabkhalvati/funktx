@@ -15,6 +15,7 @@ export const _generic = {
     const result = new type()
     Object.defineProperty(result, VALUE_FIELD, {
       value: v,
+      enumerable: true,
     })
 
     return result

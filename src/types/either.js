@@ -1,7 +1,11 @@
+import { Just, Nothing } from './maybe'
 import { VALUE_FIELD, _generic } from './internals'
 
 export function Either() {}
+// istanbul ignore next
 Either.toString = () => 'Either'
+Either.Left = Left
+Either.Right = Right
 
 Either.prototype.fold = function (onLeft) {
   const self = this
@@ -11,9 +15,18 @@ Either.prototype.fold = function (onLeft) {
   }
 }
 
+Either.prototype.toMaybe = function () {
+  return this instanceof Right ? Just.of(this[VALUE_FIELD]) : Nothing.of()
+}
+
+Either.fromMaybe = function (maybe, def) {
+  return maybe.toEither(def)
+}
+
 export function Right() {
   Either.call(this)
 }
+// istanbul ignore next
 Right.toString = () => 'Right'
 
 Right.prototype = Object.create(Either.prototype)
@@ -27,6 +40,7 @@ Right.of = _generic.of(Right)
 export function Left() {
   Either.call(this)
 }
+// istanbul ignore next
 Left.toString = () => 'Left'
 
 Left.prototype = Object.create(Either.prototype)
