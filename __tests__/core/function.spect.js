@@ -1,5 +1,5 @@
 import * as fc from 'fast-check'
-import { call, compose, constant, identity, pipe } from '../../src/core'
+import { call, compose, constant, flip, identity, pipe } from '../../src/core'
 import { verify } from '../../src/test-utils'
 
 describe('function', () => {
@@ -32,6 +32,36 @@ describe('function', () => {
     fc.assert(
       fc.property(fc.anything(), fc.anything(), (x, y) => {
         verify(constant(x)(y)).is(x)
+      })
+    )
+  })
+
+  it('flip works', () => {
+    fc.assert(
+      fc.property(
+        fc.anything(),
+        fc.anything(),
+        fc.anything(),
+        fc.array(fc.anything()),
+        (thisParam, a, b, host) => {
+          const merge = (x, y, ...z) => [x, y, ...z]
+
+          verify(flip(merge)(a, b, ...host)).is(merge(b, a, ...host))
+        }
+      )
+    )
+  })
+
+  it('flip preserves this', () => {
+    fc.assert(
+      fc.property(fc.anything(), (thisParam) => {
+        const thisDependant = function (a, b) {
+          return [this, a, b]
+        }
+
+        verify(flip(thisDependant).call(thisParam, 1, 2)).is(
+          thisDependant.call(thisParam, 2, 1)
+        )
       })
     )
   })
