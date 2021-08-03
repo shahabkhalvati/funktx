@@ -1,8 +1,10 @@
 import { Left, Right } from './either'
 import { VALUE_FIELD, _generic } from './internals'
-import { isUndefined } from '../core/internal/_isNil'
+import { ifElse } from '../core'
+import { isUndefined } from '../core/internal/_isUndefined'
 
 export function Maybe() {}
+
 // istanbul ignore next
 Maybe.toString = () => 'Maybe'
 Maybe.Just = Just
@@ -10,7 +12,6 @@ Maybe.Nothing = Nothing
 
 Maybe.isJust = (x) => x instanceof Just
 Maybe.isNothing = (x) => x instanceof Nothing
-Maybe.from = (x) => (isUndefined(x) ? Nothing.of() : Just.of(x))
 
 Maybe.prototype.fold = function (onNothing) {
   const self = this
@@ -20,22 +21,13 @@ Maybe.prototype.fold = function (onNothing) {
     return onNothing()
   }
 }
-
-Maybe.prototype.toEither = function (def) {
-  return this.isJust ? Right.of(this[VALUE_FIELD]) : Left.of(def)
-}
-
-Maybe.fromEither = function (either) {
-  return either.toMaybe()
-}
-
 export function Just() {
   Maybe.call(this)
 
   this.isJust = true
   this.isNothing = false
 }
-// istanbul ignore next
+
 Just.toString = () => 'Just'
 
 Just.prototype = Object.create(Maybe.prototype)
@@ -52,6 +44,7 @@ export function Nothing() {
   this.isJust = false
   this.isNothing = true
 }
+
 // istanbul ignore next
 Nothing.toString = () => 'Nothing'
 
@@ -62,3 +55,13 @@ Nothing.prototype.map = () => Nothing.of()
 Nothing.prototype.toString = _generic.toString(Nothing)
 
 Nothing.of = () => new Nothing()
+
+Maybe.prototype.toEither = function (def) {
+  return this.isJust ? Right.of(this[VALUE_FIELD]) : Left.of(def)
+}
+
+Maybe.fromEither = function (either) {
+  return either.toMaybe()
+}
+
+Maybe.from = ifElse(isUndefined, Nothing.of, Just.of)

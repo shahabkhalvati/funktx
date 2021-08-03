@@ -26,7 +26,6 @@ Either.fromMaybe = function (maybe, def) {
 export function Right() {
   Either.call(this)
 }
-// istanbul ignore next
 Right.toString = () => 'Right'
 
 Right.prototype = Object.create(Either.prototype)
@@ -40,7 +39,6 @@ Right.of = _generic.of(Right)
 export function Left() {
   Either.call(this)
 }
-// istanbul ignore next
 Left.toString = () => 'Left'
 
 Left.prototype = Object.create(Either.prototype)

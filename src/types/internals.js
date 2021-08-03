@@ -1,3 +1,4 @@
+import { isUndefined } from '../core/internal/_isUndefined'
 export const VALUE_FIELD = Symbol.for('VALUE')
 
 export const _generic = {
@@ -8,7 +9,8 @@ export const _generic = {
   },
   toString: function (type) {
     return function () {
-      return `${type.toString()}(${this[VALUE_FIELD]})`
+      const value = this[VALUE_FIELD]
+      return `${type.toString()}(${isUndefined(value) ? '' : String(value)})`
     }
   },
   of: (type) => (v) => {
