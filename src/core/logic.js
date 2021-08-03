@@ -16,10 +16,8 @@ export const both = (pred1, pred2) => (arg) => isTrue(pred1(arg) && pred2(arg))
 export const either = (pred1, pred2) => (arg) =>
   isTrue(pred1(arg) || pred2(arg))
 
-export const all = (pred) => (values) =>
-  values.every((value) => evaluatesToTrue(pred)(value))
-export const any = (pred) => (values) =>
-  values.some((value) => evaluatesToTrue(pred)(value))
+export const all = (pred) => (values) => values.every(evaluatesToTrue(pred))
+export const any = (pred) => (values) => values.some(evaluatesToTrue(pred))
 
 export const allPass = (preds) => (value) =>
   preds.every((pred) => isTrue(pred(value)))
