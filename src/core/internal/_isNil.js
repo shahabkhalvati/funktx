@@ -1,5 +1,3 @@
-import { complement } from '../../core'
-export const isUndefined = (input) => typeof input === 'undefined'
-export const isDefined = complement(isUndefined)
+import { isUndefined } from './_isUndefined'
 
 export const isNil = (input) => input === null || isUndefined(input)

@@ -2,7 +2,7 @@ import { Just, Nothing } from '../../src/types/maybe'
 import { Left, Right } from '../../src/types/either'
 import fc from 'fast-check'
 import { identity } from '../../src/core'
-import { isDefined } from '../../src/core/internal/_isNil'
+import { isDefined } from '../../src/core/internal/_isDefined'
 import { map } from '../../src/types/map'
 import { verify } from '../../src/test-utils'
 
