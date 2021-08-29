@@ -33,9 +33,8 @@ const isMatch = compose(
 )
 
 const isDefaultCase = ([rule]) => isFunction(rule)
-const withNoRules = ([action]) => [{}, action]
-
-const standardize = map(ifElse(isDefaultCase, withNoRules, identity))
+const matchAnything = ([action]) => [{}, action]
+const standardize = map(ifElse(isDefaultCase, matchAnything, identity))
 
 export const match =
   (...patterns) =>
