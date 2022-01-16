@@ -48,7 +48,7 @@ describe('object', () => {
   })
 
   describe('propEquals', () => {
-    it('should check prop value', () => {
+    it('should check against prop value', () => {
       fc.assert(
         fc.property(
           fc.object(),
@@ -56,29 +56,29 @@ describe('object', () => {
           fc.anything(),
           (host, key, val) => {
             const target = Object.assign(host, { [key]: val })
-            verify(propEquals(key)(val)(target)).is(true)
-            verify(propEquals(key)('not' + val)(target)).is(false)
+            verify(propEquals(val)(key)(target)).is(true)
+            verify(propEquals('not' + val)(key)(target)).is(false)
           }
         )
       )
     })
-    it('should return undefined for non-existent property', () => {
+    it('should check against undefined for non-existent key', () => {
       const lookup = 'lookup'
       fc.assert(
         fc.property(
           fc.object().filter((obj) => !(lookup in obj)),
           (host) => {
-            verify(propEquals(lookup)(undefined)(host)).is(true)
+            verify(propEquals(undefined)(lookup)(host)).is(true)
           }
         )
       )
     })
-    it('should handle undefined input', () => {
+    it('should check against undefined for undefined host', () => {
       fc.assert(
         fc.property(
           fc.string().filter((str) => str.trim().length > 0),
           (key) => {
-            verify(propEquals(key)(undefined)(undefined)).is(true)
+            verify(propEquals(undefined)(key)(undefined)).is(true)
           }
         )
       )

@@ -17,8 +17,7 @@ export const propOr = (defaultCase) => (key) =>
 export const propSatisfies = (key) => (pred) =>
   compose(equals(true), pred, prop(key))
 
-export const propEquals = (property) => (val) =>
-  compose(equals(val), prop(property))
+export const propEquals = (val) => (key) => compose(equals(val), prop(key))
 
 export const keys = ifElse(isObject, Object.keys, constant([]))
 export const values = ifElse(isObject, Object.values, constant([]))
