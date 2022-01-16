@@ -1,5 +1,12 @@
 import * as fc from 'fast-check'
-import { hasProp, keys, prop, propEquals, propOr } from '../../src/core'
+import {
+  hasProp,
+  keys,
+  prop,
+  propEquals,
+  propSatisfies,
+  propOr,
+} from '../../src/core'
 import { verify } from '../../src/test-utils'
 
 describe('object', () => {
@@ -76,6 +83,22 @@ describe('object', () => {
         )
       )
     })
+  })
+
+  it('propSatisfies', () => {
+    fc.assert(
+      fc.property(
+        fc.object(),
+        fc.string().filter((str) => str.trim().length > 0),
+        fc.anything(),
+        (host, key, val) => {
+          const target = Object.assign(host, { [key]: val })
+          const isTheSame = (val) => (x) => x === val
+          verify(propSatisfies(key)(isTheSame(val))(target)).is(true)
+          verify(propSatisfies(key)(isTheSame('not' + val))(target)).is(false)
+        }
+      )
+    )
   })
 
   describe('hasProp', () => {
