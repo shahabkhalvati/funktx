@@ -1,4 +1,4 @@
-import { compose, entries, hasPath, ifElse } from '../core'
+import { compose, entries, hasPath, ifElse } from '.'
 
 const _map = (fn) => (over) => over.map(fn)
 const iterateOverKeys = (fn) => compose(_map(fn), entries)

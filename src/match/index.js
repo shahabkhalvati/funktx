@@ -12,7 +12,7 @@ import {
   keys,
   prop,
 } from '../core'
-import { map } from '../types/map'
+import { map } from '../core/map'
 
 const testsFromPattern = (pattern) => {
   const testForField = (field) => {

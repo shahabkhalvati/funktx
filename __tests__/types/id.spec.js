@@ -1,7 +1,7 @@
 import { Id } from '../../src/types/id'
 import fc from 'fast-check'
 import { identity } from '../../src/core'
-import { map } from '../../src/types/map'
+import { map } from '../../src/core/map'
 import { verify } from '../../src/test-utils'
 
 describe('Id', () => {

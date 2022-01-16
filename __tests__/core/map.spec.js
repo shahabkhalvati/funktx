@@ -1,4 +1,4 @@
-import { flatMap, map } from '../../src/types/map'
+import { flatMap, map } from '../../src/core/map'
 import { identity } from '../../src/core'
 import { verify } from '../../src/test-utils'
 
