@@ -1,5 +1,5 @@
 import * as fc from 'fast-check'
-import { hasProp, keys, prop, propOr } from '../../src/core'
+import { hasProp, keys, prop, propEquals, propOr } from '../../src/core'
 import { verify } from '../../src/test-utils'
 
 describe('object', () => {
@@ -34,6 +34,44 @@ describe('object', () => {
           fc.string().filter((str) => str.trim().length > 0),
           (key) => {
             verify(prop(key)(undefined)).is(undefined)
+          }
+        )
+      )
+    })
+  })
+
+  describe('propEquals', () => {
+    it('should check prop value', () => {
+      fc.assert(
+        fc.property(
+          fc.object(),
+          fc.string().filter((str) => str.trim().length > 0),
+          fc.anything(),
+          (host, key, val) => {
+            const target = Object.assign(host, { [key]: val })
+            verify(propEquals(key)(val)(target)).is(true)
+            verify(propEquals(key)('not' + val)(target)).is(false)
+          }
+        )
+      )
+    })
+    it('should return undefined for non-existent property', () => {
+      const lookup = 'lookup'
+      fc.assert(
+        fc.property(
+          fc.object().filter((obj) => !(lookup in obj)),
+          (host) => {
+            verify(propEquals(lookup)(undefined)(host)).is(true)
+          }
+        )
+      )
+    })
+    it('should handle undefined input', () => {
+      fc.assert(
+        fc.property(
+          fc.string().filter((str) => str.trim().length > 0),
+          (key) => {
+            verify(propEquals(key)(undefined)(undefined)).is(true)
           }
         )
       )

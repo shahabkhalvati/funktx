@@ -1,4 +1,5 @@
-import { F, constant } from './function'
+import { F, compose, constant } from './function'
+import { equals } from './internal/_equals'
 import { ifElse } from './logic'
 import { isObject } from './is'
 
@@ -12,6 +13,9 @@ export const prop = (key) =>
 
 export const propOr = (defaultCase) => (key) =>
   ifElse(hasProp(key), prop(key), constant(defaultCase))
+
+export const propEquals = (property) => (val) =>
+  compose(equals(val), prop(property))
 
 export const keys = ifElse(isObject, Object.keys, constant([]))
 export const values = ifElse(isObject, Object.values, constant([]))
