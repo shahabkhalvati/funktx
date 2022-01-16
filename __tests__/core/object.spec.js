@@ -4,8 +4,8 @@ import {
   keys,
   prop,
   propEquals,
-  propSatisfies,
   propOr,
+  propSatisfies,
 } from '../../src/core'
 import { verify } from '../../src/test-utils'
 
