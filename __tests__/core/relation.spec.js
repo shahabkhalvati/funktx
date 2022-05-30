@@ -1,5 +1,6 @@
 import * as fc from 'fast-check'
 import {
+  complement,
   isGreaterThan,
   isGreaterThanOrEqualTo,
   isInRange,
@@ -16,8 +17,13 @@ describe('relation', () => {
         verify(isLessThan(num)(num)).is(false)
         verify(isGreaterThan(num)(num)).is(false)
 
-        verify(isLessThanOrEqualTo(num)(num)).is(true)
-        verify(isGreaterThanOrEqualTo(num)(num)).is(true)
+        if (Number.isNaN(num)) {
+          verify(isLessThanOrEqualTo(num)(num)).is(false)
+          verify(isGreaterThanOrEqualTo(num)(num)).is(false)
+        } else {
+          verify(isLessThanOrEqualTo(num)(num)).is(true)
+          verify(isGreaterThanOrEqualTo(num)(num)).is(true)
+        }
       })
     )
   })
@@ -25,10 +31,12 @@ describe('relation', () => {
   it('range works with integers and floats', () => {
     fc.assert(
       fc.property(
-        fc.oneof(fc.integer(), fc.float()),
-        fc.oneof(fc.integer(), fc.float()),
-        fc.oneof(fc.integer(), fc.float()),
-        fc.oneof(fc.integer({ min: 1 }), fc.float({ min: 1 })),
+        fc.oneof(fc.integer(), fc.float()).filter(complement(Number.isNaN)),
+        fc.oneof(fc.integer(), fc.float()).filter(complement(Number.isNaN)),
+        fc.oneof(fc.integer(), fc.float()).filter(complement(Number.isNaN)),
+        fc
+          .oneof(fc.integer({ min: 1 }), fc.float({ min: 1 }))
+          .filter(complement(Number.isNaN)),
         (a, b, c, positiveNum) => {
           const [min, y, max] = [a, b, c].sort((a, b) => a - b)
 
