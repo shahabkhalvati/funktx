@@ -1,5 +1,6 @@
 import { compose } from './function'
 import { equals } from './internal/_equals'
+import { isFunction } from './internal/_isFunction'
 
 export const isTrue = equals(true)
 export const isFalse = equals(false)
@@ -10,7 +11,9 @@ export const ifElse = (pred, onTrue, onFalse) => (input) => {
 
 export const evaluatesToTrue = (pred) => compose(isTrue, pred)
 
-export const complement = (pred) => (input) => !pred(input)
+export const _complement = (pred) => (input) => !pred(input)
+export const complement = ifElse(isFunction, _complement, (x) => !x)
+export const not = complement
 
 export const both = (pred1, pred2) => (arg) => isTrue(pred1(arg) && pred2(arg))
 export const either = (pred1, pred2) => (arg) =>
