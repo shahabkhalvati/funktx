@@ -4,13 +4,12 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
   "rules": {
-    "arrow-parens": [2, "always"],
     "sort-imports": ["error"]
   }
 }
