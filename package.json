@@ -31,7 +31,7 @@
     "@rollup/plugin-node-resolve": "^15.0.2",
     "babel-jest": "^29.5.0",
     "coveralls": "^3.1.1",
-    "eslint": "^8.38.0",
+    "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "fast-check": "^3.8.0",
     "husky": "^8.0.3",
