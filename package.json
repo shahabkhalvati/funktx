@@ -28,7 +28,7 @@
     "@babel/preset-env": "^7.23.2",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "babel-jest": "^29.5.0",
     "coveralls": "^3.1.1",
     "eslint": "^8.51.0",
