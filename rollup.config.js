@@ -1,11 +1,10 @@
 import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import del from 'rollup-plugin-delete'
-import filesize from 'rollup-plugin-filesize'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import pkg from './package.json'
 
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser';
 
 const plugins = [
   nodeResolve(),
@@ -13,7 +12,6 @@ const plugins = [
     exclude: 'node_modules/**',
   }),
   terser(),
-  filesize(),
 ]
 
 // libraries to not included in export / peer dependencies
